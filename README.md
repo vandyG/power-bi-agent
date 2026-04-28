@@ -15,7 +15,8 @@ End-to-end Power BI development assistant for GitHub Copilot. Bundles a chat-mod
 | [`skills/powerbi-performance/`](skills/powerbi-performance/) | Diagnosis decision tree, model/report/refresh/capacity tuning, KQL monitoring |
 | [`skills/powerbi-visualization/`](skills/powerbi-visualization/) | Chart selection, layout patterns, accessibility, mobile design |
 | [`skills/powerbi-sql/`](skills/powerbi-sql/) | Wrap a `.sql` file in an M `Sql.Database()` expression |
-| [`.github/plugin/plugin.json`](.github/plugin/plugin.json) | GitHub Copilot CLI plugin manifest |
+| [`plugin.json`](plugin.json) | GitHub Copilot CLI plugin manifest (root, per spec) |
+| [`.mcp.json`](.mcp.json) | MCP server bundle installed with the plugin |
 | [`mcp/mcp.linux.json`](mcp/mcp.linux.json), [`mcp/mcp.wsl.json`](mcp/mcp.wsl.json) | Reference MCP server configs (default and WSL flavor) |
 
 ## Install
@@ -109,7 +110,7 @@ The agent always:
 nix develop  # via the bundled shell.nix (or use direnv)
 ```
 
-The repo currently has no automated tests; skills are validated by use. Update the `version` in [`.github/plugin/plugin.json`](.github/plugin/plugin.json) when shipping breaking changes to skill or agent definitions.
+The repo currently has no automated tests; skills are validated by use. Update the `version` in [`plugin.json`](plugin.json) when shipping breaking changes to skill or agent definitions.
 
 ## License
 
