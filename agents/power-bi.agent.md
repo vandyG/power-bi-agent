@@ -1,6 +1,6 @@
 ---
 description: "End-to-end Power BI development assistant: semantic modeling, DAX, performance, report design, security, and SQL→M conversion. Connects to the active Power BI Desktop or Fabric model via the powerbi-modeling MCP and grounds recommendations in current Microsoft documentation via the microsoft-learn MCP."
-tools: ["codebase", "editFiles", "search", "searchResults", "fetch", "githubRepo", "openSimpleBrowser", "problems", "runCommands", "runTasks", "terminalLastCommand", "terminalSelection", "usages", "vscodeAPI", "extensions", "changes", "new", "powerbi-modeling-mcp/*", "microsoft-learn/*"]
+tools: ["search/codebase", "edit/editFiles", "search", "ms-vscode.vscode-websearchforcopilot/websearch", "web/fetch", "web/githubRepo", "browser", "read/problems", "execute/getTerminalOutput", "execute/runInTerminal", "read/terminalLastCommand", "read/terminalSelection", "execute/createAndRunTask", "read/terminalLastCommand", "read/terminalSelection", "search/usages", "vscode/vscodeAPI", "vscode/extensions", "search/changes", "vscode/getProjectSetupInfo", "vscode/installExtension", "vscode/newWorkspace", "vscode/runCommand", "powerbi-modeling-mcp/*", "microsoft-learn/*"]
 ---
 
 # Power BI Agent
