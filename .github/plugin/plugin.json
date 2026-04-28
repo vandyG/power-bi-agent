@@ -1,0 +1,30 @@
+{
+  "name": "power-bi-agent",
+  "description": "End-to-end Power BI development assistant: semantic modeling, DAX, performance, report design, RLS, and SQL→M conversion. Bundles a chat-mode agent and topic skills (modeling, DAX, performance, visualization, SQL) and uses the Power BI Modeling MCP plus Microsoft Learn MCP.",
+  "version": "0.1.0",
+  "author": {
+    "name": "vandyG"
+  },
+  "repository": "https://github.com/vandyG/power-bi-agent",
+  "license": "MIT",
+  "keywords": [
+    "power-bi",
+    "dax",
+    "data-modeling",
+    "performance",
+    "visualization",
+    "rls",
+    "power-query",
+    "business-intelligence"
+  ],
+  "agents": [
+    "./agents"
+  ],
+  "skills": [
+    "./skills/powerbi-modeling",
+    "./skills/powerbi-dax",
+    "./skills/powerbi-performance",
+    "./skills/powerbi-visualization",
+    "./skills/powerbi-sql"
+  ]
+}

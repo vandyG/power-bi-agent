@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/mcp.json",
+  "_comment": "WSL-flavored config: launches the Power BI Modeling MCP from a Windows-side .exe via cmd.exe so Power BI Desktop instances are discoverable. The Nix module substitutes @POWERBI_MCP_EXE@ with the resolved Windows path at activation time.",
+  "servers": {
+    "powerbi-modeling-mcp": {
+      "type": "stdio",
+      "command": "cmd.exe",
+      "args": [
+        "/C",
+        "@POWERBI_MCP_EXE@",
+        "--start"
+      ],
+      "env": {}
+    },
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
