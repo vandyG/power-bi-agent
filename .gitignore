@@ -2,3 +2,4 @@
 .envrc
 .venv/
 downloads/
+*.code-workspace
