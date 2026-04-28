@@ -224,3 +224,13 @@ Use for:
 - [ ] Performance tested under load
 - [ ] Role mappings documented
 - [ ] Workspace roles understood (Admins bypass RLS)
+
+## Caveats (Microsoft Learn)
+
+- **`USERELATIONSHIP()` + RLS**: With RLS enabled, using `USERELATIONSHIP()` in DAX queries and measures may cause unexpected errors. Redesign expressions to rely on the active model relationship, or to avoid activating an inactive relationship inside an RLS-bound measure. Source: [Row-level security (RLS) with Power BI — Considerations and limitations](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security#considerations-and-limitations).
+- **Bidirectional cross-filtering**: RLS uses single-direction filter propagation by default even when a relationship is bidirectional. To enable bidirectional propagation under RLS, edit the relationship and check **Apply security filter in both directions**. Only one bidirectional relationship per table can have this enabled.
+- **Service principals**: Cannot be added to an RLS role; RLS is not applied for apps using a service principal as the effective identity.
+- **Live connections to AS**: Define RLS in the Analysis Services model, not in Power BI.
+- **Workspace roles**: RLS only applies to **Viewer**. Admin/Member/Contributor bypass RLS.
+- **Test as role limits**: Does not work for DirectQuery models with SSO, paginated reports, Q&A, Quick insights, or Copilot.
+

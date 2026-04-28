@@ -5,7 +5,6 @@
   "author": {
     "name": "vandyG"
   },
-  "repository": "https://github.com/vandyG/power-bi-agent",
   "license": "MIT",
   "keywords": [
     "power-bi",
@@ -17,14 +16,8 @@
     "power-query",
     "business-intelligence"
   ],
-  "agents": [
-    "./agents"
-  ],
-  "skills": [
-    "./skills/powerbi-modeling",
-    "./skills/powerbi-dax",
-    "./skills/powerbi-performance",
-    "./skills/powerbi-visualization",
-    "./skills/powerbi-sql"
-  ]
+  "agents": "agents/",
+  "skills": "skills/",
+  "mcpServers": ".mcp.json"
 }
+
