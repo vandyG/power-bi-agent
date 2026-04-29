@@ -1,9 +1,10 @@
 # power-bi-agent
 
-End-to-end Power BI development assistant for GitHub Copilot. Bundles a chat-mode agent and a set of topic skills (semantic modeling, DAX, performance, visualization, SQL→M) that work together against:
+End-to-end Power BI development assistant for GitHub Copilot. Bundles a chat-mode agent and a set of topic skills (semantic modeling, DAX, performance, visualization, SQL→M) that work together against live models and Power BI Project files:
 
 - **[powerbi-modeling-mcp](https://marketplace.visualstudio.com/items?itemName=analysis-services.powerbi-modeling-mcp)** — read/write the live Power BI Desktop / Fabric model.
 - **[microsoft-learn MCP](https://learn.microsoft.com/api/mcp)** — ground every recommendation in current Microsoft Learn documentation.
+- **Power BI Project files (PBIP/PBIR/TMDL)** — edit supported report and semantic model metadata directly when project files are present in the workspace.
 
 ## What's inside
 
@@ -34,13 +35,6 @@ done
 ```
 
 Then in VS Code, configure the MCP servers from `mcp/mcp.linux.json` (or `mcp/mcp.wsl.json`) into your VS Code MCP settings.
-
-### Via Nix (Home Manager)
-
-This repo is consumed as a flake input by [vandyG/nixfiles](https://github.com/vandyG/nixfiles) — see `modules/copilot/copilot.nix` there. The Nix module:
-- symlinks `agents/` and `skills/` into `~/.copilot/`
-- writes the appropriate `mcp.json` per profile (Linux vs WSL)
-- on WSL, downloads the `powerbi-modeling-mcp` VSIX and unpacks it into a Windows-accessible path so Power BI Desktop is discoverable
 
 ### As a Copilot CLI plugin
 
@@ -100,9 +94,21 @@ In VS Code, open chat and select **`@power-bi`** (the consolidated agent). Topic
 
 The agent always:
 1. Connects to the live model (when relevant) before advising.
-2. Searches Microsoft Learn before recommending non-trivial patterns.
-3. Cites the documentation URLs it grounded the answer in.
-4. Validates writes (`dax_query_operations(operation: "Validate")`) after creating measures.
+2. Checks for PBIP/PBIR/TMDL files when report or visual work can be done through source-controlled project files.
+3. Searches Microsoft Learn before recommending non-trivial patterns.
+4. Cites the documentation URLs it grounded the answer in.
+5. Uses `vscode_askQuestions` if a Power BI Modeling MCP call returns a file/artifact URI, because the agent can only inspect it after the user saves it into the workspace.
+6. Validates writes (`dax_query_operations(operation: "Validate")`) after creating measures.
+
+## PBIP workflow
+
+When a workspace contains Power BI Project files, the agent can work directly against supported text metadata instead of treating report development as Desktop-only.
+
+- Report-side editable surfaces: `definition.pbir`, PBIR `definition/` folders, and already-registered files under `StaticResources/RegisteredResources/`.
+- Report-side non-editable preview surfaces: `report.json`, `mobileState.json`, `semanticModelDiagramLayout.json`.
+- Semantic model file workflow: prefer the Modeling MCP for live changes, but use `*.SemanticModel/definition/` when the project is using TMDL and the task is explicitly file-based or source-control oriented.
+- After external file edits, Power BI Desktop must be reopened or restarted before the changes appear.
+- If a Modeling MCP result produces a file URI or `vscode-chat-response-resource://` artifact, the user must save it to a workspace path before the agent can read it. If no file was generated because there was no data, the agent should continue without blocking.
 
 ## Development
 
